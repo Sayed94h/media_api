@@ -3,12 +3,12 @@
 let constraintObj = {
 	audio: true,
 	video: {
-		facingMode: "user",
+		facingMode: ["user", "environment"],
 		width: { min: 240, ideal: 310, max: 640 },
 		height: { min: 120, ideal: 180, max: 480 },
 	},
 };
-
+let allDevices = [];
 // let constraintObj = {
 // 	audio: true,
 // 	video: {
@@ -38,7 +38,9 @@ if (navigator.mediaDevices === undefined) {
 		.then((devices) => {
 			devices.forEach((device) => {
 				console.log(device.kind.toUpperCase(), device.label);
+				allDevices.push(device);
 			});
+			console.log("all devices: ", allDevices);
 		})
 		.catch((err) => {
 			console.error(err.name, err.message);
