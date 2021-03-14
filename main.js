@@ -81,6 +81,7 @@ navigator.mediaDevices
 		};
 		mRecorder.onstop = function (event) {
 			let blob = new Blob(chunks, { type: "video/mp4;" });
+			console.log("the blob", blob);
 			chunks = [];
 			let videoURL = window.URL.createObjectURL(blob);
 			save_video.src = videoURL;
@@ -91,23 +92,3 @@ navigator.mediaDevices
 	.catch((err) => {
 		console.error(err.name, err.message);
 	});
-
-// capture input
-
-document.addEventListener("DOMContentLoaded", (event) => {
-	let from = document.getElementById("form");
-	let inputFile = document.getElementById("capture");
-	inputFile.addEventListener("change", (event) => {
-		console.dir(inputFile.files[0]);
-		if (inputFile.files[0].type.indexOf("image/") > -1) {
-			let img = document.getElementById("img");
-			img.src = window.URL.createObjectURL(inputFile.files[0]);
-		} else if (inputFile.files[0].type.indexOf("audio/") > -1) {
-			let audio = document.getElementById("audio");
-			audio.src = window.URL.createObjectURL(inputFile.files[0]);
-		} else if (inputFile.files[0].type.indexOf("video/") > -1) {
-			let video = document.getElementById("video");
-			video.src = window.URL.createObjectURL(inputFile.files[0]);
-		}
-	});
-});
